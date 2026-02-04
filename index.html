@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 in a Row - Gra dla dwóch graczy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>4 in a Row</h1>
+            <p class="subtitle">Ułóż 4 pionki w rzędzie aby wygrać!</p>
+        </header>
+
+        <!-- Menu główne -->
+        <section id="menu-screen" class="screen active">
+            <div class="menu-card">
+                <h2>Ustawienia gry</h2>
+
+                <div class="player-setup">
+                    <div class="player-config">
+                        <h3>Gracz 1</h3>
+                        <input type="text" id="player1-name" placeholder="Imię gracza 1" maxlength="20">
+                        <div class="color-picker-wrapper">
+                            <label for="player1-color">Kolor pionka:</label>
+                            <input type="color" id="player1-color" value="#3498db">
+                        </div>
+                    </div>
+
+                    <div class="vs-divider">VS</div>
+
+                    <div class="player-config">
+                        <h3>Gracz 2</h3>
+                        <input type="text" id="player2-name" placeholder="Imię gracza 2" maxlength="20">
+                        <div class="color-picker-wrapper">
+                            <label for="player2-color">Kolor pionka:</label>
+                            <input type="color" id="player2-color" value="#27ae60">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-buttons">
+                    <button id="start-game-btn" class="btn btn-primary">Rozpocznij grę</button>
+                    <button id="show-history-btn" class="btn btn-secondary">Historia meczów</button>
+                    <button id="reset-progress-btn" class="btn btn-danger">Resetuj postęp</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ekran gry -->
+        <section id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="player-info player1-info">
+                    <span class="player-token" id="player1-token"></span>
+                    <span class="player-name-display" id="player1-name-display">Gracz 1</span>
+                    <span class="player-score" id="player1-score">0</span>
+                </div>
+
+                <div class="turn-indicator">
+                    <span>Tura:</span>
+                    <span id="current-turn-name">-</span>
+                    <span class="turn-token" id="current-turn-token"></span>
+                </div>
+
+                <div class="player-info player2-info">
+                    <span class="player-score" id="player2-score">0</span>
+                    <span class="player-name-display" id="player2-name-display">Gracz 2</span>
+                    <span class="player-token" id="player2-token"></span>
+                </div>
+            </div>
+
+            <div class="board-container">
+                <div id="game-board" class="game-board">
+                    <!-- Plansza 6x6 generowana przez JS -->
+                </div>
+                <div id="board-overlay" class="board-overlay">
+                    <div class="overlay-content">
+                        <span id="overlay-message"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-controls">
+                <button id="hint-btn" class="btn btn-hint">Włącz podpowiedzi</button>
+                <button id="new-round-btn" class="btn btn-primary" style="display: none;">Nowa runda</button>
+                <button id="back-to-menu-btn" class="btn btn-secondary">Powrót do menu</button>
+            </div>
+
+            <div id="game-message" class="game-message"></div>
+
+            <!-- Historia wyników w grze -->
+            <div class="game-history">
+                <h3>Historia sesji</h3>
+                <div id="game-history-list" class="game-history-list">
+                    <!-- Generowane przez JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Ekran historii -->
+        <section id="history-screen" class="screen">
+            <div class="history-card">
+                <h2>Historia meczów</h2>
+                <div id="history-list" class="history-list">
+                    <!-- Lista meczów generowana przez JS -->
+                </div>
+                <button id="back-from-history-btn" class="btn btn-secondary">Powrót do menu</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal potwierdzenia resetu -->
+    <div id="reset-modal" class="modal">
+        <div class="modal-content">
+            <h3>Czy na pewno chcesz zresetować wyniki?</h3>
+            <p>Ta operacja usunie całą historię meczów. Imiona i kolory graczy pozostaną bez zmian.</p>
+            <div class="modal-buttons">
+                <button id="confirm-reset-btn" class="btn btn-danger">Tak, resetuj</button>
+                <button id="cancel-reset-btn" class="btn btn-secondary">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
