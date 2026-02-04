@@ -202,6 +202,9 @@
         Game.init(currentPlayers.player1, currentPlayers.player2, nextStarter);
         lastStartingPlayer = nextStarter;
         suggestedMove = null;
+
+        // Ukryj overlay i zresetuj UI
+        hideOverlay();
         elements.hintBtn.style.display = 'inline-block';
         elements.newRoundBtn.style.display = 'none';
         elements.gameMessage.textContent = '';
@@ -232,6 +235,23 @@
                 elements.gameMessage.textContent = '';
             }
         }, 2000);
+    }
+
+    /**
+     * Pokazuje overlay z komunikatem na planszy
+     * @param {string} message - Treść komunikatu
+     * @param {string} type - Typ ('winner' lub 'draw')
+     */
+    function showOverlay(message, type) {
+        elements.overlayMessage.textContent = message;
+        elements.boardOverlay.className = `board-overlay active ${type}`;
+    }
+
+    /**
+     * Ukrywa overlay
+     */
+    function hideOverlay() {
+        elements.boardOverlay.className = 'board-overlay';
     }
 
     /**
@@ -480,8 +500,8 @@
         elements.player1Score.textContent = currentScore.player1;
         elements.player2Score.textContent = currentScore.player2;
 
-        elements.gameMessage.textContent = `${result.playerName} wygrywa!`;
-        elements.gameMessage.className = 'game-message winner';
+        // Pokaż overlay z wynikiem
+        showOverlay(`${result.playerName} wygrywa!`, 'winner');
 
         elements.hintBtn.style.display = 'none';
         elements.newRoundBtn.style.display = 'inline-block';
@@ -503,8 +523,8 @@
             winner: null
         });
 
-        elements.gameMessage.textContent = 'Remis!';
-        elements.gameMessage.className = 'game-message draw';
+        // Pokaż overlay z wynikiem
+        showOverlay('Remis!', 'draw');
 
         elements.hintBtn.style.display = 'none';
         elements.newRoundBtn.style.display = 'inline-block';
